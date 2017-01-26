@@ -17,10 +17,11 @@ class Invoice < ApplicationRecord
 	end
 
 	def set_reference
-		self.reference = "HAHA" if self.reference.blank?
+		#have to write reference name logic
+		self.reference =  SecureRandom.hex(8) if self.reference.blank?
 	end
 
 	def round_amount
-		self.amount = self.amount.round(2)
+		self.amount = self.amount.round(2) if self.reference.present?
 	end
 end

@@ -22,7 +22,7 @@ class Collection < ApplicationRecord
 		if collection_amount_total_match
 			return
 		else
-			errors.add(:error, "Collection amounts exceed amount in Invoice.Please check Invoice.")	
+			errors.add(:error, "Collection amounts exceed amount in Invoice.Please check Invoice.")
 		end
 	end
 
@@ -32,7 +32,7 @@ class Collection < ApplicationRecord
 		total_amount = Collection.where(invoice_id: self.invoice_id).map(&:collection_amount).sum
 		amount_given_to_customer = Invoice.find_by(id: self.invoice_id).amount
 		balance = (amount_given_to_customer) + (total_amount)
-		if balance <= 0
+		if balance > 0 && balance >= (self.collection_amount).abs
 			return true
 		else
 			return false
