@@ -1,7 +1,7 @@
 class Collection < ApplicationRecord
-	belongs_to :invoice, inverse_of: :collections
+	belongs_to :invoice, inverse_of: :collections, primary_key: :reference, foreign_key: :reference, class_name: 'Invoice'
 
-	validates :invoice, presence: true
+	validates :reference, presence: true
 	validates :collection_amount, presence: true
 	validates :collection_date, presence: true
 
@@ -18,6 +18,7 @@ class Collection < ApplicationRecord
 	end
 
 	def check_amount_exceeds_or_not?
+		return errors.add(:error, "Enter a valid reference.") if self.invoice.nil?
 		return if self.collection_amount.positive?
 		if collection_amount_total_match
 			return
@@ -29,8 +30,8 @@ class Collection < ApplicationRecord
 	private
 
 	def collection_amount_total_match
-		total_amount = Collection.where(invoice_id: self.invoice_id).map(&:collection_amount).sum
-		amount_given_to_customer = Invoice.find_by(id: self.invoice_id).amount
+		total_amount = Collection.where(reference: self.reference).map(&:collection_amount).sum
+		amount_given_to_customer = self.invoice.amount
 		balance = (amount_given_to_customer) + (total_amount)
 		if balance > 0 && balance >= (self.collection_amount).abs
 			return true

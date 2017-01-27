@@ -1,0 +1,62 @@
+<div class="table_collection">
+  <table class='table table-bordered table-hover'>
+    <thead>
+      <tr>
+        <th class='align_center'>Reference</th>
+        <th class='align_center'>Collection Date</th>
+        <th class='align_center'>Collection Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @collections.present? %>
+      <tr class="table-info">
+        <td class="align_center"><%= @collections.first.reference %></td>
+        <td class="align_center"><%= @collections.first.invoice.invoice_date %></td>
+        <td class="align_center"><%= @collections.first.invoice.amount %></td>
+      </tr>
+    <%end%>
+      <% @collections.each do |collection| %>
+      <tr>
+        <td class="align_center">
+          <%= collection.reference %>
+        </td>
+        <td class="align_center">
+          <%= collection.collection_date %>
+        </td>
+        <td class="align_center">
+          <%= collection.collection_amount %>
+        </td>
+      </tr>
+      <% end %>
+      <tr class="table-danger">
+        <td class="align_center"></td>
+        <td class="align_center">Balance</td>
+        <td class="align_center"><%= (Invoice.find_by(reference: params[:reference_cont]).amount) + (@collections.map(&:collection_amount).sum)%></td>
+      </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+  <div>
+    <button type="button" class= "btn btn-primary btn-md" data-toggle="modal" data-target="#ModalAddCollection">Add Collection</button>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ModalAddCollection" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Collection</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="errors_invoice">
+        </div>
+        <%= render "form_collection" %>
+      </div>
+    </div>
+  </div>
+</div>
+
