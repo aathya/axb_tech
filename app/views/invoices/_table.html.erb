@@ -1,0 +1,49 @@
+<div class="table_invoice">
+  <table class='table table-striped table-bordered table-hover'>
+    <thead>
+      <tr class="bg-primary">
+        <th class='align_center'>Reference</th>
+        <th class='align_center'>Invoice Date</th>
+        <th class='align_center'>Customer</th>
+        <th class='align_center'>Brand Manager</th>
+        <th class='align_center'>Narration</th>
+        <th class='align_center'>Amount</th>
+        <th class='align_center'>Total Collection</th>
+        <th class='align_center'>Balance Due</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoices.each do |invoice| %>
+      <tr>
+        <td class="align_center">
+          <%= link_to invoice.reference, collections_path(reference_cont: invoice.reference) %>
+        </td>
+        <td class="align_center">
+          <%= invoice.invoice_date %>
+        </td>
+        <td class="align_center">
+          <%= invoice.customer_name %>
+        </td>
+        <td class="align_center">
+          <%= invoice.brand_manager %>
+        </td>
+        <td class="align_center">
+          <%= invoice.narration %>
+        </td>
+        <td class="align_center">
+          <%= invoice.amount %>
+        </td>
+        <td class="align_center">
+          <%= invoice.collections.count %>
+        </td>
+        <td class="align_center">
+          <%= (invoice.amount) + (invoice.collections.map(&:collection_amount).sum) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>
+<!-- <%#= will_paginate @class_sections %> -->

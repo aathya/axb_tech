@@ -1,0 +1,8 @@
+<% if @collections.present? %>
+<h3><%= @collections.first.reference %></h3>
+<h3><%= @collections.first.invoice.customer_name %></h3>
+<h3><%= @collections.first.invoice.brand_manager %></h3>
+<h4><%= @collections.first.invoice.narration %></h4>
+<br />
+<br />
+<%end%>

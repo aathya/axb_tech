@@ -16,12 +16,11 @@ ActiveRecord::Schema.define(version: 20170124152008) do
   enable_extension "plpgsql"
 
   create_table "collections", force: :cascade do |t|
-    t.integer  "invoice_id",        null: false
+    t.string   "reference",         null: false
     t.float    "collection_amount", null: false
     t.date     "collection_date",   null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["invoice_id"], name: "index_collections_on_invoice_id", using: :btree
   end
 
   create_table "invoices", force: :cascade do |t|

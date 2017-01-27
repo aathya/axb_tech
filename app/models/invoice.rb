@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-	has_many  :collections, inverse_of: :invoice, dependent: :restrict_with_exception
+	has_many  :collections, inverse_of: :invoice, foreign_key: :reference, primary_key: :reference, dependent: :restrict_with_exception
 
 	validates :reference, presence: true, uniqueness: true
 	validates :brand_manager, presence: true, length: { in: 3..100 }

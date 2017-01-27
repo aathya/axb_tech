@@ -1,0 +1,30 @@
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-full-width",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "100",
+  "hideDuration": "5000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+<% if  @invoice_created.errors.empty? %>
+  $('.invoice_form')[0].reset();
+  $('#ModalAddInvoice').modal('hide');
+    toastr["success"]('New Bill has been generated successfully.')
+   setTimeout(function(){
+    window.location.reload(true);
+    }, 2000);
+<%else%>
+  $('.errors_invoice').append('<p class = "error_msg" ><%= @invoice_created.errors.full_messages.join(' , ') %></p>');
+  setTimeout(function(){
+      $('.error_msg').remove();
+    }, 3000);
+<%end%>

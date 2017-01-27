@@ -1,0 +1,34 @@
+<%= form_for (@invoice), html: {class: 'invoice_form'}, method: :post, remote: true do |f| %>
+  <div class="form-group row">
+    <%= f.label :brand_manager, "Brand Manager:", class: "col-4 col-form-label" %>
+    <div class="col-8">
+      <%= f.text_field :brand_manager, required: true, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :customer_name, "Customer Name:", class: "col-4 col-form-label" %>
+    <div class="col-8">
+      <%= f.text_field :customer_name, required: true, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+   <%= f.label :narration, "Narration:", class: "col-4 col-form-label" %>
+   <div class="col-8">
+     <%= f.text_field :narration, required: true, class: 'form-control' %>
+   </div>
+  </div>
+
+  <div class="form-group row">
+   <%= f.label :amount, "Amount:", class: "col-4 col-form-label" %>
+   <div class="col-8">
+     <%= f.number_field :amount, required: true, class: 'form-control' %>
+   </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: 'btn btn-primary pull-right'  %>
+  </div>
+
+<% end %>
