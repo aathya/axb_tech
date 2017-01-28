@@ -1,0 +1,13 @@
+<% if flash.present? %>
+  <% if flash[:success].present? %>
+    <div class='alert alert-success flash_success_message'>
+      <a class="close" data-dismiss="alert">×</a>
+      <%= flash[:success]%>
+    </div>
+    <% else %>
+    <div class='alert alert-danger flash_non_success_message'>
+      <a class="close" data-dismiss="alert">×</a>
+      <%= flash[:error].join(',') %>
+    </div>
+  <% end %>
+<% end %>

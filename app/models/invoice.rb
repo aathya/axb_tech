@@ -12,6 +12,9 @@ class Invoice < ApplicationRecord
 	before_validation :set_reference, on: :create
 	before_validation :round_amount
 
+	scope :collected_bills, -> { joins(:collections).group("invoices.id").having("(SUM(collections.collection_amount) + (invoices.amount)) = 0") }
+	scope :pending_bills, -> { where.not(id: collected_bills.ids) }
+
 	def set_invoice_date
 		self.invoice_date = Date.today if self.invoice_date.blank?
 	end

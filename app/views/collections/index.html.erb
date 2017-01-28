@@ -1,4 +1,9 @@
 <div class="container">
   <%= render "collection_details" %>
+  <%= render "flash_messages" %>
   <%= render "table_collection" %>
+</div>
+
+<div class="col-md-12">
+<%= link_to "Back To All Invoice", invoices_path, class: "btn btn-info back-btn" %>
 </div>

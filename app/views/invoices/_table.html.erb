@@ -10,6 +10,7 @@
         <th class='align_center'>Amount</th>
         <th class='align_center'>Total Collection</th>
         <th class='align_center'>Balance Due</th>
+        <th class='align_center'>Add Collection</th>
       </tr>
     </thead>
     <tbody>
@@ -39,6 +40,9 @@
         <td class="align_center">
           <%= (invoice.amount) + (invoice.collections.map(&:collection_amount).sum) %>
         </td>
+        <td class="align_center">
+          <%= link_to "Add Collection", collections_path(reference_cont: invoice.reference), class: "btn btn-primary add-collection-btn", data: { toggle: "modal", target: '#ModalAddCollection', id: invoice.reference } %>
+        </td>
       </tr>
       <% end %>
     </tbody>
@@ -46,4 +50,25 @@
     </tfoot>
   </table>
 </div>
-<!-- <%#= will_paginate @class_sections %> -->
+<div class="flickr_pagination">
+  <%= will_paginate @invoices, container: false %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalAddCollection" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Collection</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="errors_invoice">
+        </div>
+        <%= render "form_collection" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<%= form_tag(collections_path, method: :post, :multipart => true) do %>
+  <%= hidden_field_tag "collection[reference]", nil ,class: 'hidden-reference' %>
+  <div class="form-group row">
+    <div class="col-4 col-form-label">
+      <label for="day">Collection Amount:</label>
+    </div>
+    <div class="col-8">
+      <%= text_field_tag "collection[collection_amount]",nil, required: 'true', class: 'form-control', placeholder: 'Collection Amount', required: 'true' %>
+    </div>
+  </div>
+  <!-- <div class="modal-footer"> -->
+  <div class="form-group">
+    <div class="col-sm-12">
+      <div class="pull-right">
+          <%= submit_tag 'Submit', :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
