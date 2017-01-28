@@ -4,3 +4,21 @@
 .pull-right{
   float: right;
 }
+.action-button-margins {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.table_collection {
+  margin-top: 20px
+}
+.reference-decoration {
+  color: #33B8FF ;
+}
+.back-btn {
+  margin-bottom: 30px;
+  margin-top: 20px;
+  float: left;
+}
+.btn-add-collection {
+  float: right;
+}

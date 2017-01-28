@@ -2,7 +2,10 @@ class InvoicesController < ApplicationController
   before_action :set_new_invoice, only: [:index]
 
   def index
-    @invoices = Invoice.all
+    invoices = Invoice.collected_bills if params[:bill] == "collected_bills"
+    invoices = Invoice.pending_bills if params[:bill] == "pending_bills"
+    invoices = Invoice.all if params[:bill].nil?
+    @invoices = invoices.paginate(page: params[:page]).order("created_at DESC")
     respond_to do |format|
       format.html
       format.json { render json: @invoices, status: :ok }

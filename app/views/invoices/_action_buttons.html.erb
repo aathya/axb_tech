@@ -1,12 +1,15 @@
-<div class="row">
-  <div class="col-md-4">
+<div class="row action-button-margins">
+  <div class="col-md-3">
     <button type="button" class= "btn btn-outline-primary btn-md" data-toggle="modal" data-target="#ModalAddInvoice">Add a new bill</button>
   </div>
-  <div class="col-md-4">
-    <button type="button" class= "btn btn-outline-primary btn-md">Show Pending Bills</button>
+  <div class="col-md-3">
+    <%= link_to "Show All Bills", root_path, class: "btn btn-outline-primary btn-md" %>
   </div>
-  <div class="col-md-4">
-    <button type="button" class= "btn btn-outline-primary btn-md">Show Collected Bills</button>
+  <div class="col-md-3">
+    <%= link_to "Show Collected Bills", invoices_path(bill: "collected_bills"), class: "btn btn-outline-primary btn-md" %>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Show Pending Bills", invoices_path(bill: "pending_bills"), class: "btn btn-outline-primary btn-md" %>
   </div>
 </div>
 
