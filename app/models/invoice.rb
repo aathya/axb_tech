@@ -6,13 +6,13 @@ class Invoice < ApplicationRecord
 	validates :narration, presence: true, length: { in: 3..100 }
 	validates :invoice_date, presence: true
 	validates :customer_name, presence: true, length: { in: 3..100 }
-	validates :amount, presence: true
+	validates :amount, presence: true, numericality: { greater_than: 0 }
 
 	before_validation :set_invoice_date, on: :create
 	before_validation :set_reference, on: :create
 	before_validation :round_amount
 
-	scope :collected_bills, -> { joins(:collections).group("invoices.id").having("(SUM(collections.collection_amount) + (invoices.amount)) = 0") }
+	scope :collected_bills, -> { joins(:collections).group("invoices.id").having("(SUM(collections.amount) + (invoices.amount)) = 0") }
 	scope :pending_bills, -> { where.not(id: collected_bills.ids) }
 
 	def set_invoice_date
@@ -21,7 +21,7 @@ class Invoice < ApplicationRecord
 
 	def set_reference
 		#have to write reference name logic
-		self.reference =  SecureRandom.hex(8) if self.reference.blank?
+		self.reference =  "CES/OWB/#{Date.today.strftime('%y')}-#{(Date.today + 1.year).strftime('%y')}/#{Date.today.strftime('%m')} #{rand(999)}" if self.reference.blank?
 	end
 
 	def round_amount

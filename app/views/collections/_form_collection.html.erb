@@ -1,9 +1,9 @@
 <%= form_for (@collection), html: {class: 'collection_form'}, method: :post do |f| %>
   <%= f.hidden_field :reference, class: 'form-control', value: params[:reference_cont] %>
   <div class="form-group row">
-   <%= f.label :collection_amount, "Collection Amount:", class: "col-4 col-form-label" %>
+   <%= f.label :amount, "Collection Amount:", class: "col-4 col-form-label" %>
    <div class="col-8">
-     <%= f.number_field :collection_amount, required: true, class: 'form-control' %>
+     <%= f.number_field :amount, required: true, class: 'form-control' %>
    </div>
   </div>
 

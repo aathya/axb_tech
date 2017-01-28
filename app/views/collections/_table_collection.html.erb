@@ -24,14 +24,14 @@
           <%= collection.collection_date %>
         </td>
         <td class="align_center">
-          <%= collection.collection_amount %>
+          <%= collection.amount %>
         </td>
       </tr>
       <% end %>
       <tr class="table-danger">
         <td class="align_center"></td>
         <td class="align_center">Balance</td>
-        <td class="align_center"><%= (Invoice.find_by(reference: params[:reference_cont]).amount) + (@collections.map(&:collection_amount).sum)%></td>
+        <td class="align_center"><%= (Invoice.find_by(reference: params[:reference_cont]).amount) + (@collections.map(&:amount).sum)%></td>
       </tr>
     </tbody>
     <tfoot>
