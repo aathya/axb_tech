@@ -10,7 +10,7 @@ class CollectionsController < ApplicationController
   end
 
   def create
-    collection_params = collection_permit_params(params)
+    collection_params   = collection_permit_params(params)
     @collection_created = Collection.new(collection_params)
     respond_to do |format|
       if @collection_created.save
@@ -30,7 +30,7 @@ class CollectionsController < ApplicationController
   private
 
   def collection_permit_params(params)
-    params.require(:collection).permit(:collection_amount, :reference)
+    params.require(:collection).permit(:amount, :reference)
   end
 
   def search_params

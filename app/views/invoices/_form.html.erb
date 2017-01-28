@@ -23,7 +23,7 @@
   <div class="form-group row">
    <%= f.label :amount, "Amount:", class: "col-4 col-form-label" %>
    <div class="col-8">
-     <%= f.number_field :amount, required: true, class: 'form-control' %>
+     <%= f.number_field :amount, required: true, class: 'form-control', min: 0 %>
    </div>
   </div>
 

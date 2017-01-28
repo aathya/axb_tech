@@ -38,7 +38,7 @@
           <%= invoice.collections.count %>
         </td>
         <td class="align_center">
-          <%= (invoice.amount) + (invoice.collections.map(&:collection_amount).sum) %>
+          <%= (invoice.amount) + (invoice.collections.map(&:amount).sum) %>
         </td>
         <td class="align_center">
           <%= link_to "Add Collection", collections_path(reference_cont: invoice.reference), class: "btn btn-primary add-collection-btn", data: { toggle: "modal", target: '#ModalAddCollection', id: invoice.reference } %>
@@ -50,7 +50,7 @@
     </tfoot>
   </table>
 </div>
-<div class="flickr_pagination">
+<div class="flickr_pagination pagination-margin">
   <%= will_paginate @invoices, container: false %>
 </div>
 
