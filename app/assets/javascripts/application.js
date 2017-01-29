@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require tether.min
 //= require bootstrap.min
 //= require toastr.min
 //= require turbolinks
